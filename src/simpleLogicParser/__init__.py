@@ -2,7 +2,6 @@ from .cli import start
 
 import argparse
 
-
 def main():
     parser=argparse.ArgumentParser()
 

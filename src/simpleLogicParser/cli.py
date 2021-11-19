@@ -3,6 +3,7 @@ from antlr4 import CommonTokenStream, FileStream, InputStream
 from .logicLexer import logicLexer
 from .logicParser import logicParser
 from .logicVisitor import logicVisitor
+from .customErrorListener import customErrorListener
 
 
 def start(inputFile, trues, expr):
@@ -19,6 +20,8 @@ def evaluate(input_stream, variables={}):
     stream = CommonTokenStream(lexer)
 
     parser = logicParser(stream)
+
+    parser.addErrorListener(customErrorListener)
 
     tree = parser.expr()
 

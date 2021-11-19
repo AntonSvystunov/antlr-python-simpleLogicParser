@@ -1,5 +1,4 @@
 # Generated from logic.g4 by ANTLR 4.9.3
-from logging import debug
 from antlr4 import *
 
 if __name__ is not None and "." in __name__:
@@ -27,6 +26,11 @@ class logicVisitor(ParseTreeVisitor):
         else:
             return self.visitChildren(ctx)
 
+    def defaultResult(self):
+        return False
+
+    def aggregateResult(self, aggregate, nextResult):
+        return aggregate or nextResult
 
     # Visit a parse tree produced by logicParser#opsgn.
     def visitOpsgn(self, ctx:logicParser.OpsgnContext):
@@ -34,11 +38,10 @@ class logicVisitor(ParseTreeVisitor):
             return lambda a,b: a or b
         return lambda a,b: a and b
 
-
     # Visit a parse tree produced by logicParser#sid.
     def visitSid(self, ctx:logicParser.SidContext):
+        key = ctx.getText()
         try:
-            key = ctx.getText()
             return self.data[key]
         except:
             return False
