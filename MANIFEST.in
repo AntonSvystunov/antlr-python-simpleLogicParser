@@ -1,0 +1,15 @@
+include pyproject.toml
+
+# Include the README
+include *.md
+
+# Include the license file
+include LICENSE.txt
+
+# Include setup.py
+include setup.py
+
+recursive-include example *.txt
+recursive-include grammar *.g4
+recursive-include src *.interp
+recursive-include src *.tokens
